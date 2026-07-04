@@ -1,4 +1,4 @@
-# 🛡️ NetShield IDS/IPS
+#NetShield IDS/IPS
 
 **Hybrid Intrusion Detection and Prevention System**
 
@@ -6,7 +6,7 @@ A lightweight, lab-friendly IDS/IPS that combines **Snort signature-based detect
 
 ---
 
-## 📋 Features
+##Features
 
 ### Core Capabilities
 - ✅ **PCAP Traffic Analysis** - Analyze offline network captures using Tshark
@@ -22,7 +22,7 @@ A lightweight, lab-friendly IDS/IPS that combines **Snort signature-based detect
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 netshield-ids/
@@ -52,7 +52,7 @@ netshield-ids/
 
 ---
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 
@@ -93,7 +93,7 @@ netshield-ids/
 
 ---
 
-## 💻 Usage
+## Usage
 
 ### Option 1: Web Dashboard (Recommended)
 
@@ -106,12 +106,12 @@ python main.py dashboard
 Then open your browser to: **http://127.0.0.1:5000**
 
 **Dashboard Features:**
-- 📁 Drag-and-drop PCAP file upload
-- 📊 Real-time attack statistics and charts
-- 🚨 Live alert table with severity color-coding
-- 📈 Attack timeline visualization
-- 📄 One-click report generation
-- 🔒 IPS auto-blocking toggle
+-  Drag-and-drop PCAP file upload
+-  Real-time attack statistics and charts
+-  Live alert table with severity color-coding
+- Attack timeline visualization
+-  One-click report generation
+-  IPS auto-blocking toggle
 
 ### Option 2: Command-Line Analysis
 
@@ -127,7 +127,7 @@ python main.py analyze sample.pcap --report output_report.html
 
 ---
 
-## 🔍 Detection Logic Explained
+##  Detection Logic Explained
 
 ### 1. Signature-Based Detection (Snort)
 
@@ -181,7 +181,7 @@ All alerts (Snort + Anomaly) are:
 
 ---
 
-## 🛡️ IPS Auto-Blocking
+##  IPS Auto-Blocking
 
 **Optional feature** to automatically block high-severity threats using Windows Firewall.
 
@@ -197,19 +197,19 @@ All alerts (Snort + Anomaly) are:
 - Uses Windows Firewall (`netsh advfirewall`) to create block rules
 - Respects whitelist (localhost, gateway IPs)
 
-**⚠️ Important Notes:**
+** Important Notes:**
 - Requires **administrator privileges**
 - Disabled by default to prevent false positives
 - Review alerts before enabling in production
 
 ---
 
-## 📊 Sample Output
+##  Sample Output
 
 ### CLI Analysis Output
 ```
 ============================================================
-🛡️  NetShield IDS/IPS - Traffic Analysis
+  NetShield IDS/IPS - Traffic Analysis
 ============================================================
 Analyzing: sample.pcap
 
@@ -229,7 +229,7 @@ Analyzing: sample.pcap
   ✓ High severity: 8
 
 ============================================================
-📊 ANALYSIS SUMMARY
+ ANALYSIS SUMMARY
 ============================================================
 
 Severity Distribution:
@@ -250,7 +250,7 @@ Top Attack Types:
 
 ---
 
-## 🧪 Testing with Sample PCAPs
+##  Testing with Sample PCAPs
 
 ### Where to Get Sample PCAPs
 
@@ -268,7 +268,7 @@ Place PCAP files in the `sample_pcaps/` directory:
 
 ---
 
-## 🎓 Academic Use & Viva Preparation
+##  Academic Use & Viva Preparation
 
 ### Key Points to Explain
 
@@ -291,7 +291,7 @@ Place PCAP files in the `sample_pcaps/` directory:
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 Edit `backend/config.py` to customize:
 
@@ -314,7 +314,7 @@ DASHBOARD_PORT = 5000
 
 ---
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### Snort Not Found
 ```
@@ -340,7 +340,7 @@ Error: Tshark not found
 
 ---
 
-## 📚 Technology Stack
+##  Technology Stack
 
 - **Backend**: Python 3.8+
 - **Detection**: Snort (signature-based), Custom algorithms (anomaly-based)
@@ -352,13 +352,13 @@ Error: Tshark not found
 
 ---
 
-## 📝 License
+##  License
 
 This project is created for **academic and educational purposes**. Feel free to use, modify, and extend for learning and research.
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **NetShield Team**  
 Hybrid IDS/IPS Project  
@@ -366,7 +366,7 @@ Version 1.0
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - **Snort** - Open-source IDS/IPS engine
 - **Wireshark** - Network protocol analyzer
@@ -375,7 +375,7 @@ Version 1.0
 
 ---
 
-## 📞 Support
+##  Support
 
 For issues or questions:
 1. Check the Troubleshooting section
@@ -384,4 +384,4 @@ For issues or questions:
 
 ---
 
-**Happy Threat Hunting! 🛡️🔍**
+**Happy Threat Hunting!**
