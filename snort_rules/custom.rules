@@ -1,0 +1,62 @@
+# Snort Custom Rules for NetShield IDS/IPS
+# Format: action protocol src_ip src_port direction dst_ip dst_port (rule options)
+
+# SQL Injection Detection
+alert tcp any any -> any 80 (msg:"SQL Injection Attempt - UNION SELECT"; content:"UNION"; nocase; content:"SELECT"; nocase; distance:0; sid:1000001; rev:1;)
+alert tcp any any -> any 80 (msg:"SQL Injection Attempt - OR 1=1"; content:"OR"; nocase; content:"1=1"; nocase; distance:0; sid:1000002; rev:1;)
+alert tcp any any -> any 80 (msg:"SQL Injection Attempt - DROP TABLE"; content:"DROP"; nocase; content:"TABLE"; nocase; distance:0; sid:1000003; rev:1;)
+
+# XSS Detection
+alert tcp any any -> any 80 (msg:"XSS Attempt - Script Tag"; content:"<script"; nocase; sid:1000004; rev:1;)
+alert tcp any any -> any 80 (msg:"XSS Attempt - JavaScript Event"; content:"javascript:"; nocase; sid:1000005; rev:1;)
+alert tcp any any -> any 80 (msg:"XSS Attempt - Onerror Event"; content:"onerror="; nocase; sid:1000006; rev:1;)
+
+# Port Scanning Detection
+alert tcp any any -> any any (msg:"Port Scan Detected - SYN Scan"; flags:S; threshold:type both, track by_src, count 20, seconds 60; sid:1000007; rev:1;)
+alert tcp any any -> any any (msg:"Port Scan Detected - NULL Scan"; flags:0; threshold:type both, track by_src, count 20, seconds 60; sid:1000008; rev:1;)
+
+# Brute Force Detection
+alert tcp any any -> any 22 (msg:"SSH Brute Force Attempt"; flags:S; threshold:type both, track by_src, count 10, seconds 60; sid:1000009; rev:1;)
+alert tcp any any -> any 3389 (msg:"RDP Brute Force Attempt"; flags:S; threshold:type both, track by_src, count 10, seconds 60; sid:1000010; rev:1;)
+alert tcp any any -> any 21 (msg:"FTP Brute Force Attempt"; flags:S; threshold:type both, track by_src, count 10, seconds 60; sid:1000011; rev:1;)
+
+# Command Injection
+alert tcp any any -> any 80 (msg:"Command Injection - Shell Command"; content:"/bin/sh"; nocase; sid:1000012; rev:1;)
+alert tcp any any -> any 80 (msg:"Command Injection - Bash"; content:"/bin/bash"; nocase; sid:1000013; rev:1;)
+alert tcp any any -> any 80 (msg:"Command Injection - PowerShell"; content:"powershell"; nocase; sid:1000014; rev:1;)
+
+# Directory Traversal
+alert tcp any any -> any 80 (msg:"Directory Traversal Attempt"; content:"../"; sid:1000015; rev:1;)
+alert tcp any any -> any 80 (msg:"Directory Traversal - Windows"; content:"..\\"; sid:1000016; rev:1;)
+
+# Suspicious HTTP Methods
+alert tcp any any -> any 80 (msg:"Suspicious HTTP Method - TRACE"; content:"TRACE"; nocase; offset:0; depth:5; sid:1000017; rev:1;)
+alert tcp any any -> any 80 (msg:"Suspicious HTTP Method - TRACK"; content:"TRACK"; nocase; offset:0; depth:5; sid:1000018; rev:1;)
+
+# Malware C2 Communication
+alert tcp any any -> any any (msg:"Possible Malware Beacon - Regular Interval"; threshold:type both, track by_src, count 10, seconds 300; sid:1000019; rev:1;)
+alert tcp any any -> any 80 (msg:"Suspicious User-Agent - Bot"; content:"User-Agent|3a| bot"; nocase; sid:1000020; rev:1;)
+
+# DNS Tunneling Indicators
+alert udp any any -> any 53 (msg:"Suspicious DNS Query - Long Domain"; dsize:>100; sid:1000021; rev:1;)
+
+# File Upload Attacks
+alert tcp any any -> any 80 (msg:"Malicious File Upload - PHP"; content:"Content-Type"; nocase; content:".php"; nocase; distance:0; sid:1000022; rev:1;)
+alert tcp any any -> any 80 (msg:"Malicious File Upload - Executable"; content:"Content-Type"; nocase; content:".exe"; nocase; distance:0; sid:1000023; rev:1;)
+
+# Remote Code Execution
+alert tcp any any -> any 80 (msg:"RCE Attempt - eval()"; content:"eval("; nocase; sid:1000024; rev:1;)
+alert tcp any any -> any 80 (msg:"RCE Attempt - exec()"; content:"exec("; nocase; sid:1000025; rev:1;)
+
+# LDAP Injection
+alert tcp any any -> any 389 (msg:"LDAP Injection Attempt"; content:"*)("; sid:1000026; rev:1;)
+
+# XML External Entity (XXE)
+alert tcp any any -> any 80 (msg:"XXE Attack Attempt"; content:"<!ENTITY"; nocase; sid:1000027; rev:1;)
+
+# Server-Side Request Forgery (SSRF)
+alert tcp any any -> any 80 (msg:"SSRF Attempt - localhost"; content:"localhost"; nocase; sid:1000028; rev:1;)
+alert tcp any any -> any 80 (msg:"SSRF Attempt - 127.0.0.1"; content:"127.0.0.1"; sid:1000029; rev:1;)
+
+# Credential Harvesting
+alert tcp any any -> any 80 (msg:"Credential Harvesting - Password in URL"; content:"password="; nocase; sid:1000030; rev:1;)

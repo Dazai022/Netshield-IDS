@@ -7,8 +7,15 @@ import sys
 import os
 import argparse
 
+# Reconfigure stdout for Windows console emoji support
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='backslashreplace')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', errors='backslashreplace')
+
 # Add backend to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 
 from backend.pcap_parser import parse_pcap_file
 from backend.snort_engine import run_snort_analysis

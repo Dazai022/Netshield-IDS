@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetShield - Hybrid IDS/IPS Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🛡️ NetShield IDS/IPS</h1>
+                <p class="subtitle">Hybrid Intrusion Detection & Prevention System</p>
+            </div>
+            <div class="header-controls">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span>System Active</span>
+                </div>
+                <div class="ips-toggle">
+                    <span>IPS Auto-Block</span>
+                    <label class="switch">
+                        <input type="checkbox" id="ipsToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </header>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+            <div class="upload-card">
+                <h2>📁 Traffic Analysis</h2>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="pcapFile" accept=".pcap,.pcapng" hidden>
+                    <div class="upload-content">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p><strong>Click to upload</strong> or drag & drop PCAP file here</p>
+                        <span class="file-types">Supports .pcap and .pcapng captures</span>
+                    </div>
+                </div>
+                <button id="analyzeBtn" class="btn btn-primary" disabled>
+                    <span class="btn-text">Analyze Network Traffic</span>
+                    <span class="btn-loader" hidden>Analyzing Packets...</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-content">
+                    <h3 id="totalAlerts">0</h3>
+                    <p>Total Threats</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon high">🔴</div>
+                <div class="stat-content">
+                    <h3 id="highSeverity">0</h3>
+                    <p>High Severity</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon medium">🟠</div>
+                <div class="stat-content">
+                    <h3 id="mediumSeverity">0</h3>
+                    <p>Medium Severity</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon low">🔵</div>
+                <div class="stat-content">
+                    <h3 id="lowSeverity">0</h3>
+                    <p>Low Severity</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section">
+            <div class="chart-card">
+                <h2>🎯 Attack Category Breakdown</h2>
+                <canvas id="attackTypeChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h2>🚨 Top Attacker Source IPs</h2>
+                <canvas id="attackerChart"></canvas>
+            </div>
+        </section>
+
+        <section class="timeline-section">
+            <div class="chart-card full-width">
+                <h2>📈 Attack Timeline & Distribution</h2>
+                <canvas id="timelineChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Alerts Section -->
+        <section class="alerts-section">
+            <div class="alerts-header">
+                <h2>⚡ Real-Time Threat Stream</h2>
+                <div class="alerts-controls">
+                    <button id="refreshBtn" class="btn btn-secondary">🔄 Refresh</button>
+                    <button id="reportBtn" class="btn btn-success">📄 Download HTML Report</button>
+                    <button id="clearBtn" class="btn btn-danger">🗑️ Clear Alerts</button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="alerts-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Attack / Threat Type</th>
+                            <th>Source IP</th>
+                            <th>Destination IP</th>
+                            <th>Severity</th>
+                            <th>Engine Source</th>
+                        </tr>
+                    </thead>
+                    <tbody id="alertsTableBody">
+                        <tr>
+                            <td colspan="6" class="no-data">No alerts detected. Upload a PCAP file to begin analysis.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p><strong>NetShield IDS/IPS</strong> — Hybrid Intrusion Detection & Prevention System</p>
+            <p>Snort Signature Rules + Statistical Anomaly Detection Engine</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

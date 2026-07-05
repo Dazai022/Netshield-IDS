@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data & Logs
+data/alerts.json
+data/ips_blocks.log
+data/snort_alert.txt
+data/snort_logs/
+data/uploads/
+data/*.html
+
+# Environment / IDE
+.env
+venv/
+.vscode/
+.idea/
